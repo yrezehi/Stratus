@@ -4,4 +4,4 @@
   <br>
 </h1>
 
-Cause I dislike already existing boilerplate.
+<h4 align="center">Cause I dislike already existing boilerplate.</h4>
