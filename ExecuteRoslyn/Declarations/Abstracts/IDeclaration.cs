@@ -1,13 +1,12 @@
-﻿using ExecuteRoslyn.Declarations.Abstracts;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ExecuteRoslyn.Declarations.Native
+namespace ExecuteRoslyn.Declarations.Abstracts
 {
-    public class Class : IDeclaration
+    public interface IDeclaration
     {
         public string Name { get; set; }
         public string Modifier { get; set; }
