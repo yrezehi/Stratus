@@ -8,7 +8,7 @@ namespace ExecuteRoslyn.Declarations.Native.Abstracts
 {
     public interface IDeclaration
     {
-        public string Name { get; set; }
-        public string Modifier { get; set; }
+        public string? Name { get; set; }
+        public string? Modifier { get; set; }
     }
 }

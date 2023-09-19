@@ -4,7 +4,7 @@ namespace ExecuteRoslyn.Declarations.Native
 {
     public class Class : IDeclaration
     {
-        public string Name { get; set; }
-        public string Modifier { get; set; }
+        public string? Name { get; set; }
+        public string? Modifier { get; set; }
     }
 }
