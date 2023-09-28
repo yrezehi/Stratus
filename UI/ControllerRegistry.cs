@@ -6,6 +6,11 @@ namespace UI
     {
         public static void RegisterControllers(this WebApplication application)
         {
+            application.Index();
+        }
+
+        private static void Index(this WebApplication application)
+        {
             application.MapGet("/", () => Results.Extensions.HTML("index"));
         }
     }
