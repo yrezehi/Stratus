@@ -9,9 +9,6 @@ namespace Stratus.Web.Services
 {
     public static class IBaseService
     {
-        public static void BuildBase()
-        {
-            Method getMethod = new Method("GetAll");
-        }
+        public static void BuildBase() { }
     }
 }

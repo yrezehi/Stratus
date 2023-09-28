@@ -3,20 +3,22 @@ using System.Xml.Linq;
 
 namespace Stratus.Declarations.Native
 {
-    public class Method : IDeclaration
+    public class Method : IDeclaration<Method>
     {
         public string? Name { get; set; }
         public string? Modifier { get; set; }
 
-        public Method(string name, string modifier = "public")
+        public Method() { }
+
+        public Method(string name, string modifier)
         {
             Name = name;
             Modifier = modifier;
         }
 
-        public static Class Build(string name, string modifier = "public")
+        public static Method Build(string name, string modifier = "public")
         {
-            return new Class(name, modifier);
+            return new Method(name, modifier);
         }
     }
 }
