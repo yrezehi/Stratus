@@ -1,0 +1,15 @@
+C:\Users\Administrator\Documents\Projects\Roslyn\ExecuteRoslyn\ExecuteRoslyn\bin\Debug\net7.0\ExecuteRoslyn.exe
+C:\Users\Administrator\Documents\Projects\Roslyn\ExecuteRoslyn\ExecuteRoslyn\bin\Debug\net7.0\ExecuteRoslyn.deps.json
+C:\Users\Administrator\Documents\Projects\Roslyn\ExecuteRoslyn\ExecuteRoslyn\bin\Debug\net7.0\ExecuteRoslyn.runtimeconfig.json
+C:\Users\Administrator\Documents\Projects\Roslyn\ExecuteRoslyn\ExecuteRoslyn\bin\Debug\net7.0\ExecuteRoslyn.dll
+C:\Users\Administrator\Documents\Projects\Roslyn\ExecuteRoslyn\ExecuteRoslyn\bin\Debug\net7.0\ExecuteRoslyn.pdb
+C:\Users\Administrator\Documents\Projects\Roslyn\ExecuteRoslyn\ExecuteRoslyn\obj\Debug\net7.0\ExecuteRoslyn.csproj.AssemblyReference.cache
+C:\Users\Administrator\Documents\Projects\Roslyn\ExecuteRoslyn\ExecuteRoslyn\obj\Debug\net7.0\ExecuteRoslyn.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Administrator\Documents\Projects\Roslyn\ExecuteRoslyn\ExecuteRoslyn\obj\Debug\net7.0\ExecuteRoslyn.AssemblyInfoInputs.cache
+C:\Users\Administrator\Documents\Projects\Roslyn\ExecuteRoslyn\ExecuteRoslyn\obj\Debug\net7.0\ExecuteRoslyn.AssemblyInfo.cs
+C:\Users\Administrator\Documents\Projects\Roslyn\ExecuteRoslyn\ExecuteRoslyn\obj\Debug\net7.0\ExecuteRoslyn.csproj.CoreCompileInputs.cache
+C:\Users\Administrator\Documents\Projects\Roslyn\ExecuteRoslyn\ExecuteRoslyn\obj\Debug\net7.0\ExecuteRoslyn.dll
+C:\Users\Administrator\Documents\Projects\Roslyn\ExecuteRoslyn\ExecuteRoslyn\obj\Debug\net7.0\refint\ExecuteRoslyn.dll
+C:\Users\Administrator\Documents\Projects\Roslyn\ExecuteRoslyn\ExecuteRoslyn\obj\Debug\net7.0\ExecuteRoslyn.pdb
+C:\Users\Administrator\Documents\Projects\Roslyn\ExecuteRoslyn\ExecuteRoslyn\obj\Debug\net7.0\ExecuteRoslyn.genruntimeconfig.cache
+C:\Users\Administrator\Documents\Projects\Roslyn\ExecuteRoslyn\ExecuteRoslyn\obj\Debug\net7.0\ref\ExecuteRoslyn.dll
