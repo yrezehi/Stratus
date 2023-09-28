@@ -11,19 +11,24 @@ namespace UI.HTML
         private static string DEFAULT_INDEX_PAGE_NAME = "index";
         private static string HTML_FIELS_LOCATION = "HTML\\Files\\";
 
+        public HTMLResult() { }
+
         public Task ExecuteAsync(HttpContext httpContext)
         {
             httpContext.Response.ContentType = Text.Html;
-            httpContext.Response.ContentLength = Encoding.UTF8.GetByteCount(MapPathToHTML(httpContext.Request.Path));
 
-            throw new NotImplementedException();
+            string content = MapPathToHTML(httpContext.Request.Path);
+
+            httpContext.Response.ContentLength = Encoding.UTF8.GetByteCount(content);
+
+            return httpContext.Response.WriteAsync(content);
         }
 
         private string MapPathToHTML(string requestPath)
         {
-            requestPath = string.IsNullOrEmpty(requestPath) ? DEFAULT_INDEX_PAGE_NAME : requestPath;
+            requestPath = requestPath.Replace("/", "");
 
-            return requestPath;
+            return LoadHTML(string.IsNullOrEmpty(requestPath) ? DEFAULT_INDEX_PAGE_NAME : requestPath);
         }
         
         private string LoadHTML(string fileName)
@@ -46,7 +51,7 @@ namespace UI.HTML
 
         private string BuildHTMLFilePath(string fileName)
         {
-            return Path.Combine(HTML_FIELS_LOCATION, fileName);
+            return Path.Combine(HTML_FIELS_LOCATION, fileName) + ".html";
         }
     }
 }

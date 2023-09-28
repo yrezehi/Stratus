@@ -1,3 +1,5 @@
+using UI.HTML;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -30,9 +32,9 @@ app.MapGet("/weatherforecast", () =>
         ))
         .ToArray();
     return forecast;
-})
-.WithName("GetWeatherForecast")
-.WithOpenApi();
+});
+
+app.MapGet("/", () => Results.Extensions.HTML());
 
 app.Run();
 

@@ -31,3 +31,4 @@ C:\Users\Administrator\Documents\Projects\Roslyn\Stratus\UI\obj\Debug\net7.0\ref
 C:\Users\Administrator\Documents\Projects\Roslyn\Stratus\UI\obj\Debug\net7.0\UI.pdb
 C:\Users\Administrator\Documents\Projects\Roslyn\Stratus\UI\obj\Debug\net7.0\UI.genruntimeconfig.cache
 C:\Users\Administrator\Documents\Projects\Roslyn\Stratus\UI\obj\Debug\net7.0\ref\UI.dll
+C:\Users\Administrator\Documents\Projects\Roslyn\Stratus\UI\bin\Debug\net7.0\HTML\Files\index.html

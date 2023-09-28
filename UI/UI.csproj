@@ -11,10 +11,6 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="HTML\Utility\" />
-  </ItemGroup>
-
 <ItemGroup>
 	<Content Include="HTML\Files\\**\*.*">
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
