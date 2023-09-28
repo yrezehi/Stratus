@@ -1,0 +1,7 @@
+
+.logo-image-container {
+    position: absolute;
+    bottom: 1rem; 
+    right: 3rem;
+    opacity: 0.5;
+}

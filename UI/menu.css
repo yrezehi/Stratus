@@ -25,7 +25,7 @@
     text-transform: uppercase;
     text-decoration: none;
     color: #B5179E;
-    background-color: #4d097a78;
+    background-color: #3d175640;
     border: 2px solid #B5179E;
     border-radius: 0.5rem;
     transition: all 0.5s;
@@ -42,7 +42,6 @@
     right: 0;
     bottom: 0;
     margin: -2px;
-    background-color: rgba(255, 0, 125, .1);
     border: 2px solid #B5179E;
     border-radius: 0.5rem;
     transition: all 0.3s;
@@ -78,4 +77,36 @@
     100% {
         transform: rotateY(1deg) rotateX(-1.25deg);
    }
+}
+
+/* Neons */
+
+:root {
+    --color: #348ea9;
+}
+
+.neonText {
+    color: #fff;
+    text-shadow:
+        0 0 2px #fff,
+        0 0 2px #fff,
+        0 0 4px #fff,
+        0 0 4px var(--color),
+        0 0 8px var(--color),
+        0 0 8px var(--color),
+        0 0 16px var(--color),
+        0 0 16px var(--color);
+  }
+
+.colors {
+    color: #F72585;
+    color: #B5179E;
+    color: #7209B7;
+    color: #560BAD;
+    color: #480CA8;
+    color: #3A0CA3;
+    color: #3F37C9;
+    color: #4361EE;
+    color: #4895EF;
+    color: #4CC9F0;
 }
