@@ -2,11 +2,11 @@
 {
     public static class ResultsExtension
     {
-        public static IResult HTML(this IResultExtensions resultExtensions)
+        public static IResult HTML(this IResultExtensions resultExtensions, string path)
         {
             ArgumentNullException.ThrowIfNull(resultExtensions);
 
-            return new HTMLResult();
+            return new HTMLResult(path);
         }
     }
 }

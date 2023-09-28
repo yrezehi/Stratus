@@ -11,13 +11,17 @@ namespace UI.HTML
         private static string DEFAULT_INDEX_PAGE_NAME = "index";
         private static string HTML_FIELS_LOCATION = "HTML\\Files\\";
 
-        public HTMLResult() { }
+        private readonly string FileName;
+
+        public HTMLResult(string fileName) {
+            FileName = fileName.Trim();
+        }
 
         public Task ExecuteAsync(HttpContext httpContext)
         {
             httpContext.Response.ContentType = Text.Html;
 
-            string content = MapPathToHTML(httpContext.Request.Path);
+            string content = MapPathToHTML(FileName);
 
             httpContext.Response.ContentLength = Encoding.UTF8.GetByteCount(content);
 
@@ -26,8 +30,6 @@ namespace UI.HTML
 
         private string MapPathToHTML(string requestPath)
         {
-            requestPath = requestPath.Replace("/", "");
-
             return LoadHTML(string.IsNullOrEmpty(requestPath) ? DEFAULT_INDEX_PAGE_NAME : requestPath);
         }
         
