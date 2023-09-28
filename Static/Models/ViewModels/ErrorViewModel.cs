@@ -1,4 +1,4 @@
-namespace Static.Models
+namespace Static.Models.ViewModels
 {
     public class ErrorViewModel
     {
