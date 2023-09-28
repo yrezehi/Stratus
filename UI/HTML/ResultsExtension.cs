@@ -2,7 +2,7 @@
 {
     public static class ResultsExtension
     {
-        public static IResult HTML(this IResultExtensions resultExtensions, string path)
+        public static IResult Serve(this IResultExtensions resultExtensions, string path)
         {
             ArgumentNullException.ThrowIfNull(resultExtensions);
 

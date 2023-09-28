@@ -50,7 +50,7 @@ namespace UI.HTML
 
         private string BuildHTMLFilePath(string fileName)
         {
-            return Path.Combine(HTML_FIELS_LOCATION, fileName) + ".html";
+            return Path.Combine(HTML_FIELS_LOCATION, fileName);
         }
     }
 }
