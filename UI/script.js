@@ -933,7 +933,7 @@ class FullScreen3DExample {
     }
 
     #onMouseMove(e) {
-        this.#cameraData.positionX = (5 * ((window.innerWidth / 2) - e.clientX))
+        this.#cameraData.positionX = (2 * ((window.innerWidth / 2) - e.clientX))
             / window.innerWidth;
         this.#cameraData.positionY = 2 + (0.5 * ((window.innerHeight / 2) - e.clientY))
             / window.innerHeight;

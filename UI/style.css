@@ -12,8 +12,9 @@ body {
 .full-screen-3d-example {
     opacity: 0;
     transition: opacity 1s ease-out;
+    position: absolute;
 }
 
 .full-screen-3d-example.-loaded {
-    opacity: 1;
+    opacity: 0.75;
 }
