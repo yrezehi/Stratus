@@ -16,13 +16,23 @@ namespace UI.HTML
 
         public Task ExecuteAsync(HttpContext httpContext)
         {
-            httpContext.Response.ContentType = Text.Html;
+            httpContext.Response.ContentType = MapFileToMimetype(FileName);
 
             string content = MapPathToHTML(FileName);
 
             httpContext.Response.ContentLength = Encoding.UTF8.GetByteCount(content);
 
             return httpContext.Response.WriteAsync(content);
+        }
+
+        private string MapFileToMimetype(string fileName)
+        {
+            return new Dictionary<string, string>
+            {
+                {"js", "text/javascript"},
+                {"css", "text/css"},
+                {"html", "text/html"}
+            }[Path.GetExtension(fileName).TrimStart('.')];
         }
 
         private string MapPathToHTML(string requestPath)

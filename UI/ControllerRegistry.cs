@@ -18,7 +18,7 @@ namespace UI
 
         private static void Assets(this WebApplication application)
         {
-            application.MapGet("/Assets/{*asset}", (string asset) => Results.Extensions.Serve(asset));
+            application.MapGet("/Assets/{*asset}", (string asset) => Results.Extensions.Serve("Assets\\" + asset.Replace("/", "\\")));
         }
     }
 }
