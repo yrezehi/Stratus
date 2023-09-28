@@ -13,5 +13,10 @@ namespace Stratus.Declarations.Native
             Name = name;
             Modifier = modifier;
         }
+
+        public static Class Build(string name, string modifier = "public")
+        {
+            return new Class(name, modifier);
+        }
     }
 }

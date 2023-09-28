@@ -5,11 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Stratus.Declarations.Web.Services
+namespace Stratus.Web.Services
 {
     public static class IBaseService
     {
-        public static void Build()
+        public static void BuildBase()
         {
             Method getMethod = new Method("GetAll");
         }
