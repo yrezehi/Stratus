@@ -6,23 +6,31 @@
     <title>@ViewData["Title"] - Static</title>
 
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+
+    <!-- Note: File below is Tilwind's playground CDN -->
+    <script src="~/lib/Tailwind/tailwind.js" asp-append-version="true"></script>
+ 
 </head>
 <body>
-    <header>
-        Header
-    </header>
+
 
     <div class="wrapper-container">
+        <header>
+            Header
+        </header>
+
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
+
+        <footer>
+            <div>
+                Footer
+            </div>
+        </footer>
     </div>
 
-    <footer>
-        <div>
-            Footer
-        </div>
-    </footer>
+  
 
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)

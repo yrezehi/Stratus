@@ -1,0 +1,45 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\Administrator\\Documents\\Projects\\Roslyn\\Stratus\\Static\\obj\\Debug\\net7.0\\scopedcss\\projectbundle\\Static.bundle.scp.css",
+      "PackagePath": "staticwebassets\\Static.bundle.scp.css"
+    },
+    {
+      "Id": "C:\\Users\\Administrator\\Documents\\Projects\\Roslyn\\Stratus\\Static\\wwwroot\\css\\normalize.css",
+      "PackagePath": "staticwebassets\\css\\normalize.css"
+    },
+    {
+      "Id": "C:\\Users\\Administrator\\Documents\\Projects\\Roslyn\\Stratus\\Static\\wwwroot\\css\\site.css",
+      "PackagePath": "staticwebassets\\css\\site.css"
+    },
+    {
+      "Id": "C:\\Users\\Administrator\\Documents\\Projects\\Roslyn\\Stratus\\Static\\wwwroot\\favicon.ico",
+      "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "C:\\Users\\Administrator\\Documents\\Projects\\Roslyn\\Stratus\\Static\\wwwroot\\js\\site.js",
+      "PackagePath": "staticwebassets\\js\\site.js"
+    },
+    {
+      "Id": "C:\\Users\\Administrator\\Documents\\Projects\\Roslyn\\Stratus\\Static\\wwwroot\\lib\\Tailwind\\tailwind.js",
+      "PackagePath": "staticwebassets\\lib\\Tailwind\\tailwind.js"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.Static.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.build.Static.props",
+      "PackagePath": "build\\Static.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.buildMultiTargeting.Static.props",
+      "PackagePath": "buildMultiTargeting\\Static.props"
+    },
+    {
+      "Id": "obj\\Debug\\net7.0\\staticwebassets\\msbuild.buildTransitive.Static.props",
+      "PackagePath": "buildTransitive\\Static.props"
+    }
+  ],
+  "ElementsToRemove": []
+}
