@@ -17,8 +17,44 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\Users\\Administrator\\Documents\\Projects\\Roslyn\\Stratus\\Static\\wwwroot\\js\\binding.js",
+      "PackagePath": "staticwebassets\\js\\binding.js"
+    },
+    {
+      "Id": "C:\\Users\\Administrator\\Documents\\Projects\\Roslyn\\Stratus\\Static\\wwwroot\\js\\dom.js",
+      "PackagePath": "staticwebassets\\js\\dom.js"
+    },
+    {
+      "Id": "C:\\Users\\Administrator\\Documents\\Projects\\Roslyn\\Stratus\\Static\\wwwroot\\js\\exceptions.js",
+      "PackagePath": "staticwebassets\\js\\exceptions.js"
+    },
+    {
+      "Id": "C:\\Users\\Administrator\\Documents\\Projects\\Roslyn\\Stratus\\Static\\wwwroot\\js\\fetch.js",
+      "PackagePath": "staticwebassets\\js\\fetch.js"
+    },
+    {
+      "Id": "C:\\Users\\Administrator\\Documents\\Projects\\Roslyn\\Stratus\\Static\\wwwroot\\js\\globals.js",
+      "PackagePath": "staticwebassets\\js\\globals.js"
+    },
+    {
+      "Id": "C:\\Users\\Administrator\\Documents\\Projects\\Roslyn\\Stratus\\Static\\wwwroot\\js\\loading.js",
+      "PackagePath": "staticwebassets\\js\\loading.js"
+    },
+    {
+      "Id": "C:\\Users\\Administrator\\Documents\\Projects\\Roslyn\\Stratus\\Static\\wwwroot\\js\\notification.js",
+      "PackagePath": "staticwebassets\\js\\notification.js"
+    },
+    {
       "Id": "C:\\Users\\Administrator\\Documents\\Projects\\Roslyn\\Stratus\\Static\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
+    },
+    {
+      "Id": "C:\\Users\\Administrator\\Documents\\Projects\\Roslyn\\Stratus\\Static\\wwwroot\\js\\storage.js",
+      "PackagePath": "staticwebassets\\js\\storage.js"
+    },
+    {
+      "Id": "C:\\Users\\Administrator\\Documents\\Projects\\Roslyn\\Stratus\\Static\\wwwroot\\js\\utility.js",
+      "PackagePath": "staticwebassets\\js\\utility.js"
     },
     {
       "Id": "C:\\Users\\Administrator\\Documents\\Projects\\Roslyn\\Stratus\\Static\\wwwroot\\lib\\Tailwind\\tailwind.js",
