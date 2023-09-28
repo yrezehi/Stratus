@@ -15,4 +15,10 @@
     <Folder Include="HTML\Utility\" />
   </ItemGroup>
 
+<ItemGroup>
+	<Content Include="HTML\Files\\**\*.*">
+		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	</Content>
+</ItemGroup>
+
 </Project>
