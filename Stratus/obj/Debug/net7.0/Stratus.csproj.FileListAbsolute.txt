@@ -1,5 +1,0 @@
-C:\Users\Administrator\Documents\Projects\Roslyn\Stratus\Stratus\obj\Debug\net7.0\Stratus.csproj.AssemblyReference.cache
-C:\Users\Administrator\Documents\Projects\Roslyn\Stratus\Stratus\obj\Debug\net7.0\Stratus.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\Administrator\Documents\Projects\Roslyn\Stratus\Stratus\obj\Debug\net7.0\Stratus.AssemblyInfoInputs.cache
-C:\Users\Administrator\Documents\Projects\Roslyn\Stratus\Stratus\obj\Debug\net7.0\Stratus.AssemblyInfo.cs
-C:\Users\Administrator\Documents\Projects\Roslyn\Stratus\Stratus\obj\Debug\net7.0\Stratus.csproj.CoreCompileInputs.cache
