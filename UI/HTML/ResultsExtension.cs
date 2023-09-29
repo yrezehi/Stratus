@@ -6,7 +6,7 @@
         {
             ArgumentNullException.ThrowIfNull(resultExtensions);
 
-            return new HTMLResult(path);
+            return new HTMLResult(path.Replace("/", "\\"));
         }
     }
 }
