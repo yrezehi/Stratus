@@ -10,7 +10,7 @@ namespace Static.Repositories.Abstracts.Interfaces
         Task DisposeAsync();
     }
 
-    public interface IRDBMSUnitOfWork<TContext> : IUnitOfWork where TContext : DbContext
+    public interface IUnitOfWork<TContext> : IUnitOfWork where TContext : DbContext
     {
         TContext Context { get; }
     }
