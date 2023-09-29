@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using OwnerGPT.Models.Abstracts.Interfaces;
+using System.Reflection;
 using System.Security.Principal;
 
 namespace Static.Utilities
