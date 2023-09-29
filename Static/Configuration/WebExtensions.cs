@@ -1,4 +1,5 @@
-﻿using Static.Repositories;
+﻿using Microsoft.EntityFrameworkCore;
+using Static.Repositories;
 using Static.Repositories.Abstracts.Interfaces;
 using Static.Services.Abstracts;
 
@@ -14,7 +15,7 @@ namespace Static.Configuration
 
         public static void RegisterDB(this WebApplicationBuilder builder)
         {
-            builder.Services.AddDbContext<RepositoryContext>(option => option.UseInMemoryDatabase("OWNERGPT"));
+            builder.Services.AddDbContext<RepositoryContext>(option => option.UseInMemoryDatabase("MEMORYDATABASE"));
 
             builder.Services.AddTransient<IUnitOfWork, IUnitOfWork<RepositoryContext>>();
         }
