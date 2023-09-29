@@ -1,4 +1,4 @@
-﻿using OwnerGPT.Models.Abstracts.Interfaces;
+﻿using Static.Models.Abstracts.Interfaces;
 using System.Reflection;
 using System.Security.Principal;
 

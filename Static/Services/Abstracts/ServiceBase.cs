@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using OwnerGPT.Models.Abstracts.Interfaces;
+using Static.Models.Abstracts.Interfaces;
 using Static.Repositories.Abstracts.Interfaces;
 using Static.Services.Abstracts.Interfaces;
 using Static.Utilities;
