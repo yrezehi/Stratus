@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using OwnerGPT.Models.Abstracts.Interfaces;
 using Static.Repositories.Abstracts.Interfaces;
 using Static.Services.Abstracts.Interfaces;
+using Static.Utilities;
 using System.Linq.Expressions;
 using System.Reflection;
 

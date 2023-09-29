@@ -1,4 +1,4 @@
-﻿namespace OwnerGPT.Models.Abstracts.Interfaces
+﻿namespace Static.Models.Abstracts.Interfaces
 {
     public interface IEntity
     {
