@@ -1,4 +1,9 @@
-﻿namespace Static.Repositories
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace Static.Repositories
 {
-    public class RepositoryContext { }
+    public class RepositoryContext : DbContext
+    {
+        public RepositoryContext(DbContextOptions options) : base(options) { }
+    }
 }

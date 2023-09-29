@@ -1,4 +1,17 @@
-﻿namespace Static.Repositories.Abstracts.Interfaces
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace Static.Repositories.Abstracts.Interfaces
 {
-    public interface IUnitOfWork { }
+    public interface IUnitOfWork : IDisposable
+    {
+        IRepository<TEntity> Repository<TEntity>() where TEntity : class;
+
+        Task<int> CompletedAsync();
+        Task DisposeAsync();
+    }
+
+    public interface IRDBMSUnitOfWork<TContext> : IUnitOfWork where TContext : DbContext
+    {
+        TContext Context { get; }
+    }
 }
