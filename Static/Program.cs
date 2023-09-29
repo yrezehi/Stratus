@@ -1,4 +1,5 @@
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Serilog;
 using Serilog.Events;
 
@@ -16,6 +17,11 @@ Log.Logger = new LoggerConfiguration()
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+builder.RegisterSingletonServices();
+builder.RegisterTransientServices();
 
 var app = builder.Build();
 
