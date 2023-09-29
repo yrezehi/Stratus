@@ -6,13 +6,13 @@ namespace Static.Services.Abstracts.Interfaces
     {
         IEnumerable<T> Find(Expression<Func<T, bool>> expression);
 
-        Task<IEnumerable<T>> GetAll(int? page);
+        Task<IEnumerable<T>> GetAll();
 
         Task<T> FindById(int id);
 
         Task<T> FindByProperty<TValue>(Expression<Func<T, TValue>> selector, TValue value);
 
-        Task<IEnumerable<T>> SearchByProperty<TValue>(string propertyName, TValue value, int? page);
+        Task<IEnumerable<T>> SearchByProperty<TValue>(string propertyName, TValue value);
 
         Task<T?> NullableFindById(int id);
 
