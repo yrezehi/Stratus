@@ -33,16 +33,16 @@ namespace Stratus.Builders
         private AttributeListSyntax GetColumnAttribute(string name)
         {
             return SyntaxFactory.AttributeList(
-                SeparatedSyntaxList<AttributeSyntax>.Enumerator (
+                SyntaxFactory.SingletonSeparatedList(
                         SyntaxFactory.Attribute(
                             SyntaxFactory.ParseName("Column"),
                                 SyntaxFactory.AttributeArgumentList(
-                                    new SeparatedSyntaxList<AttributeArgumentSyntax>
-                                    {
+                                    SyntaxFactory.SingletonSeparatedList
+                                    (
                                         SyntaxFactory.AttributeArgument(
                                             SyntaxFactory.LiteralExpression(SyntaxKind.StringLiteralExpression, SyntaxFactory.Literal(name))
                                         )
-                                    }
+                                    )
                                 )
                         )
                 )
