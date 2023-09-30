@@ -8,6 +8,7 @@ using System.Reflection.Metadata;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace Stratus.Builders
 {
@@ -28,6 +29,25 @@ namespace Stratus.Builders
             SyntaxFactory.AccessorDeclaration(SyntaxKind.GetAccessorDeclaration).WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken)),
             SyntaxFactory.AccessorDeclaration(SyntaxKind.SetAccessorDeclaration).WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken))
         };
+
+        private AttributeListSyntax GetColumnAttribute(string name)
+        {
+            return SyntaxFactory.AttributeList(
+                SeparatedSyntaxList<AttributeSyntax>.Enumerator (
+                        SyntaxFactory.Attribute(
+                            SyntaxFactory.ParseName("Column"),
+                                SyntaxFactory.AttributeArgumentList(
+                                    new SeparatedSyntaxList<AttributeArgumentSyntax>
+                                    {
+                                        SyntaxFactory.AttributeArgument(
+                                            SyntaxFactory.LiteralExpression(SyntaxKind.StringLiteralExpression, SyntaxFactory.Literal(name))
+                                        )
+                                    }
+                                )
+                        )
+                )
+            );
+        }
 
         public static EntityBuilder Builder() => new EntityBuilder();
 
@@ -63,12 +83,14 @@ namespace Stratus.Builders
 
         public EntityBuilder WithGlobalVariable(SyntaxKind modifier, string type, string name)
         {
+            var x = GetColumnAttribute(name.ToLower()).ToFullString();
             PropertyDeclarations.Add(
                 SyntaxFactory.PropertyDeclaration(SyntaxFactory.ParseTypeName(type), name)
                     .AddModifiers(SyntaxFactory.Token(modifier))
                     .AddAccessorListAccessors(GetSetAccessors)
+                    .AddAttributeLists(GetColumnAttribute(name.ToLower()))
             );
-            
+
             return this;
         }
 
