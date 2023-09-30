@@ -1,10 +1,11 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
 using Microsoft.CodeAnalysis.CSharp;
-using Stratus.Builders;
+using Stratus.Builders.Roslyn.Web.Controllers;
+using Stratus.Builders.Roslyn.Web.Entity;
 
 Console.WriteLine(
-    EntityBuilder.Builder()
+    ControllerBuilder.Builder()
         .WithSpaceName("Entities")
         .WithName("User")
         .WithImports("ComponentModel.DataAnnotations", "ComponentModel.DataAnnotations.Schema")
