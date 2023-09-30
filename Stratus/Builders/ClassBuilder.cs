@@ -18,7 +18,7 @@ namespace Stratus.Builders
 
         private NamespaceDeclarationSyntax NamespaceDeclaration { get; set; }
         private ClassDeclarationSyntax ClassDeclaration { get; set; }
-        private List<FieldDeclarationSyntax> FieldDeclarations { get; set; } = new List<FieldDeclarationSyntax>();
+        private List<PropertyDeclarationSyntax> PropertyDeclarations { get; set; } = new List<PropertyDeclarationSyntax>();
 
         private ClassBuilder()
         {
@@ -59,21 +59,27 @@ namespace Stratus.Builders
 
         public ClassBuilder WithVariable(SyntaxKind modifier, string type, string name)
         {
-            FieldDeclarations.Add(SyntaxFactory.FieldDeclaration(SyntaxFactory.VariableDeclaration(SyntaxFactory.ParseTypeName(type))
-                .AddVariables(SyntaxFactory.VariableDeclarator(name)))
-                .AddModifiers(SyntaxFactory.Token(modifier)));
+            PropertyDeclarations.Add(
+                SyntaxFactory.PropertyDeclaration(SyntaxFactory.ParseTypeName(type), name)
+                    .AddModifiers(SyntaxFactory.Token(modifier))
+                    .AddAccessorListAccessors(
+                        SyntaxFactory.AccessorDeclaration(SyntaxKind.GetAccessorDeclaration).WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken)),
+                        SyntaxFactory.AccessorDeclaration(SyntaxKind.SetAccessorDeclaration).WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken))
+                    )
+            );
+            
             return this;
         }
 
         public string Build()
         {
+            foreach (var field in PropertyDeclarations)
+            {
+                ClassDeclaration = ClassDeclaration.AddMembers(field);
+            }
+
             NamespaceDeclaration = NamespaceDeclaration.AddMembers(ClassDeclaration);
             CompilationUnit = CompilationUnit.AddMembers(NamespaceDeclaration);
-
-            foreach(var field in FieldDeclarations)
-            {
-                ClassDeclaration.AddMembers(field);
-            }
 
             return CompilationUnit.NormalizeWhitespace().ToFullString();
         }
