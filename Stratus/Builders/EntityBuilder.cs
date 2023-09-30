@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Stratus.Builders
 {
-    public class ClassBuilder
+    public class EntityBuilder
     {
         protected CompilationUnitSyntax CompilationUnit { get; set; }
 
@@ -20,20 +20,20 @@ namespace Stratus.Builders
         private ClassDeclarationSyntax ClassDeclaration { get; set; }
         private List<PropertyDeclarationSyntax> PropertyDeclarations { get; set; } = new List<PropertyDeclarationSyntax>();
 
-        private ClassBuilder()
+        private EntityBuilder()
         {
             CompilationUnit = SyntaxFactory.CompilationUnit();
         }
 
-        public static ClassBuilder Builder() => new ClassBuilder();
+        public static EntityBuilder Builder() => new EntityBuilder();
 
-        public ClassBuilder WithName(string name)
+        public EntityBuilder WithName(string name)
         {
             ClassDeclaration = SyntaxFactory.ClassDeclaration(name);
             return this;
         }
 
-        public ClassBuilder WithBases(params string[] bases)
+        public EntityBuilder WithBases(params string[] bases)
         {
             foreach (var @base in bases)
             {
@@ -42,13 +42,13 @@ namespace Stratus.Builders
             return this;
         }
 
-        public ClassBuilder WithSpaceName(string @namespace)
+        public EntityBuilder WithSpaceName(string @namespace)
         {
             NamespaceDeclaration = SyntaxFactory.NamespaceDeclaration(SyntaxFactory.ParseName(@namespace)).NormalizeWhitespace();
             return this;
         }
 
-        public ClassBuilder WithImports(params string[] imports)
+        public EntityBuilder WithImports(params string[] imports)
         {
             foreach (var import in imports)
             {
@@ -57,7 +57,7 @@ namespace Stratus.Builders
             return this;
         }
 
-        public ClassBuilder WithGlobalVariable(SyntaxKind modifier, string type, string name)
+        public EntityBuilder WithGlobalVariable(SyntaxKind modifier, string type, string name)
         {
             PropertyDeclarations.Add(
                 SyntaxFactory.PropertyDeclaration(SyntaxFactory.ParseTypeName(type), name)
