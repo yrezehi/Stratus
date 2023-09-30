@@ -27,8 +27,6 @@ namespace Stratus.Declarations.Dynamic.Entities
 
             var variableDeclaration = SyntaxFactory.VariableDeclaration(SyntaxFactory.ParseTypeName("int"))
                 .AddVariables(SyntaxFactory.VariableDeclarator("Id"));
-            var fieldDeclaration = SyntaxFactory.FieldDeclaration(variableDeclaration)
-                 .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword));
 
             @namespace = @namespace.AddMembers(classDeclaration);
 

@@ -17,9 +17,8 @@ namespace Stratus.Generator
         protected Class ClassBlueprint { get; set; }
         protected CompilationUnitSyntax CompilationUnit { get; set; }
 
-        private NamespaceDeclarationSyntax Namespace { get; set; }
-        private List<string> Interfaces { get; set; } = new List<string>();
-        private string ClassName { get; set; }
+        private NamespaceDeclarationSyntax NamespaceDeclaration { get; set; }
+        private ClassDeclarationSyntax ClassDeclaration { get; set; }
 
         private ClassBuilder() {
             ClassBlueprint = new Class();
@@ -27,20 +26,25 @@ namespace Stratus.Generator
         }
 
         public static ClassBuilder Builder() => new ClassBuilder();
-        public Class Build() => ClassBlueprint;
 
         public ClassBuilder WithName(string name)
         {
-            ClassName = name;
+            ClassDeclaration = SyntaxFactory.ClassDeclaration(name);
             return this;
         }
 
-
+        public ClassBuilder WithBase(params string[] bases)
+        {
+            foreach (var @base in bases)
+            {
+                ClassDeclaration = ClassDeclaration.AddBaseListTypes(SyntaxFactory.SimpleBaseType(SyntaxFactory.ParseTypeName(@base)));
+            }
+            return this;
+        }
 
         public ClassBuilder WithSpaceName(string @namespace)
         {
-            Namespace = SyntaxFactory.NamespaceDeclaration(SyntaxFactory.ParseName(@namespace)).NormalizeWhitespace();
-            
+            NamespaceDeclaration = SyntaxFactory.NamespaceDeclaration(SyntaxFactory.ParseName(@namespace)).NormalizeWhitespace();
             return this;
         }
 
@@ -50,8 +54,16 @@ namespace Stratus.Generator
             {
                 CompilationUnit = CompilationUnit.AddUsings(SyntaxFactory.UsingDirective(SyntaxFactory.ParseName(import)));
             }
-
             return this;
+        }
+
+        public string Build() {
+            
+            NamespaceDeclaration = NamespaceDeclaration.AddMembers(ClassDeclaration);
+            CompilationUnit = CompilationUnit.AddMembers(NamespaceDeclaration);
+
+
+            return CompilationUnit.NormalizeWhitespace().ToFullString();
         }
 
     }
