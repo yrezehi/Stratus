@@ -57,7 +57,7 @@ namespace Stratus.Builders
             return this;
         }
 
-        public ClassBuilder WithVariable(SyntaxKind modifier, string type, string name)
+        public ClassBuilder WithGlobalVariable(SyntaxKind modifier, string type, string name)
         {
             PropertyDeclarations.Add(
                 SyntaxFactory.PropertyDeclaration(SyntaxFactory.ParseTypeName(type), name)

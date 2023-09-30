@@ -9,7 +9,7 @@ Console.WriteLine(
         .WithName("User")
         .WithImports("ComponentModel.DataAnnotations", "ComponentModel.DataAnnotations.Schema")
         .WithBases("IEntity")
-        .WithVariable(SyntaxKind.PublicKeyword, "int", "Id")
+        .WithGlobalVariable(SyntaxKind.PublicKeyword, "int", "Id")
         .Build()
     );
 
