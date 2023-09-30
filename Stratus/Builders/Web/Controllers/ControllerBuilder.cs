@@ -2,9 +2,10 @@
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Stratus.Builders.Roslyn;
 using Stratus.Builders.Roslyn.Web.Entity;
 
-namespace Stratus.Builders.Roslyn.Web.Controllers
+namespace Stratus.Builders.Web.Controllers
 {
     public class ControllerBuilder
     {
@@ -16,7 +17,7 @@ namespace Stratus.Builders.Roslyn.Web.Controllers
 
         private NamespaceDeclarationSyntax NamespaceDeclaration { get; set; }
         private ClassDeclarationSyntax ClassDeclaration { get; set; }
-        
+
         private string Name { get; set; }
 
         private ControllerBuilder(string name)
@@ -74,7 +75,7 @@ namespace Stratus.Builders.Roslyn.Web.Controllers
                         SyntaxFactory.ConstructorInitializer(
                             SyntaxKind.BaseConstructorInitializer,
                             SyntaxFactory.ArgumentList(
-                                SyntaxFactory.SingletonSeparatedList<ArgumentSyntax>(
+                                SyntaxFactory.SingletonSeparatedList(
                                     SyntaxFactory.Argument(
                                         SyntaxFactory.IdentifierName("Service"))))))
                     .WithBody(
@@ -101,7 +102,7 @@ namespace Stratus.Builders.Roslyn.Web.Controllers
 
         public string Build()
         {
-            this.WithSpaceName("controllers").WithName().WithConstructor().WithBases();
+            WithSpaceName("controllers").WithName().WithConstructor().WithBases();
 
             NamespaceDeclaration = NamespaceDeclaration.AddMembers(ClassDeclaration);
             CompilationUnit = CompilationUnit.AddMembers(NamespaceDeclaration);

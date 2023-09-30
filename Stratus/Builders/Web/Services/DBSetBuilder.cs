@@ -2,7 +2,7 @@
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis;
 
-namespace Stratus.Builders.Roslyn.Web.Services
+namespace Stratus.Builders.Web.Services
 {
     public class DBSetBuilder
     {
@@ -37,7 +37,7 @@ namespace Stratus.Builders.Roslyn.Web.Services
                                     SyntaxFactory.Token(SyntaxKind.VirtualKeyword)}))
                         .WithAccessorList(
                             SyntaxFactory.AccessorList(
-                                SyntaxFactory.List<AccessorDeclarationSyntax>(
+                                SyntaxFactory.List(
                                     new AccessorDeclarationSyntax[]{
                                         SyntaxFactory.AccessorDeclaration(
                                             SyntaxKind.GetAccessorDeclaration)
