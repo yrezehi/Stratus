@@ -49,11 +49,32 @@ namespace Stratus.Builders
             );
         }
 
+        private AttributeListSyntax GetTableAttribute(string name)
+        {
+            return SyntaxFactory.AttributeList(
+                SyntaxFactory.SingletonSeparatedList(
+                        SyntaxFactory.Attribute(
+                            SyntaxFactory.ParseName("Table"),
+                                SyntaxFactory.AttributeArgumentList(
+                                    SyntaxFactory.SingletonSeparatedList
+                                    (
+                                        SyntaxFactory.AttributeArgument(
+                                            SyntaxFactory.LiteralExpression(SyntaxKind.StringLiteralExpression, SyntaxFactory.Literal(name))
+                                        )
+                                    )
+                                )
+                        )
+                )
+            );
+        }
+
         public static EntityBuilder Builder() => new EntityBuilder();
 
         public EntityBuilder WithName(string name)
         {
             ClassDeclaration = SyntaxFactory.ClassDeclaration(name);
+            ClassDeclaration = ClassDeclaration.AddAttributeLists(GetTableAttribute(name.ToLower()));
+            
             return this;
         }
 
@@ -83,7 +104,6 @@ namespace Stratus.Builders
 
         public EntityBuilder WithGlobalVariable(SyntaxKind modifier, string type, string name)
         {
-            var x = GetColumnAttribute(name.ToLower()).ToFullString();
             PropertyDeclarations.Add(
                 SyntaxFactory.PropertyDeclaration(SyntaxFactory.ParseTypeName(type), name)
                     .AddModifiers(SyntaxFactory.Token(modifier))
