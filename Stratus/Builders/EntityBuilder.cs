@@ -1,6 +1,7 @@
 ﻿using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Stratus.Builders.Roslyn;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,55 +26,12 @@ namespace Stratus.Builders
             CompilationUnit = SyntaxFactory.CompilationUnit();
         }
 
-        private AccessorDeclarationSyntax[] GetSetAccessors = new AccessorDeclarationSyntax[] {
-            SyntaxFactory.AccessorDeclaration(SyntaxKind.GetAccessorDeclaration).WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken)),
-            SyntaxFactory.AccessorDeclaration(SyntaxKind.SetAccessorDeclaration).WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken))
-        };
-
-        private AttributeListSyntax GetColumnAttribute(string name)
-        {
-            return SyntaxFactory.AttributeList(
-                SyntaxFactory.SingletonSeparatedList(
-                        SyntaxFactory.Attribute(
-                            SyntaxFactory.ParseName("Column"),
-                                SyntaxFactory.AttributeArgumentList(
-                                    SyntaxFactory.SingletonSeparatedList
-                                    (
-                                        SyntaxFactory.AttributeArgument(
-                                            SyntaxFactory.LiteralExpression(SyntaxKind.StringLiteralExpression, SyntaxFactory.Literal(name))
-                                        )
-                                    )
-                                )
-                        )
-                )
-            );
-        }
-
-        private AttributeListSyntax GetTableAttribute(string name)
-        {
-            return SyntaxFactory.AttributeList(
-                SyntaxFactory.SingletonSeparatedList(
-                        SyntaxFactory.Attribute(
-                            SyntaxFactory.ParseName("Table"),
-                                SyntaxFactory.AttributeArgumentList(
-                                    SyntaxFactory.SingletonSeparatedList
-                                    (
-                                        SyntaxFactory.AttributeArgument(
-                                            SyntaxFactory.LiteralExpression(SyntaxKind.StringLiteralExpression, SyntaxFactory.Literal(name))
-                                        )
-                                    )
-                                )
-                        )
-                )
-            );
-        }
-
         public static EntityBuilder Builder() => new EntityBuilder();
 
         public EntityBuilder WithName(string name)
         {
             ClassDeclaration = SyntaxFactory.ClassDeclaration(name);
-            ClassDeclaration = ClassDeclaration.AddAttributeLists(GetTableAttribute(name.ToLower()));
+            ClassDeclaration = ClassDeclaration.AddAttributeLists(RoslynSyntaxBuilder.KeyValueAttirbute("Table", name.ToLower()));
             
             return this;
         }
@@ -107,8 +65,8 @@ namespace Stratus.Builders
             PropertyDeclarations.Add(
                 SyntaxFactory.PropertyDeclaration(SyntaxFactory.ParseTypeName(type), name)
                     .AddModifiers(SyntaxFactory.Token(modifier))
-                    .AddAccessorListAccessors(GetSetAccessors)
-                    .AddAttributeLists(GetColumnAttribute(name.ToLower()))
+                    .AddAccessorListAccessors(RoslynSyntaxBuilder.GetSetAccessors())
+                    .AddAttributeLists(RoslynSyntaxBuilder.KeyValueAttirbute("Column", name.ToLower()))
             );
 
             return this;
