@@ -42,5 +42,6 @@ namespace Stratus.Builders.Roslyn
                     .AddAccessorListAccessors(RoslynSyntaxBuilder.GetSetAccessors())
                         .AddAttributeLists(RoslynSyntaxBuilder.KeyValueAttirbute("Column", name.ToLower()));
         }
+
     }
 }

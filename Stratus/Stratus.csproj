@@ -11,4 +11,8 @@
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.7.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Builders\Roslyn\Web\Repositories\" />
+  </ItemGroup>
+
 </Project>
