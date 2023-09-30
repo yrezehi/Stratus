@@ -1,7 +1,6 @@
 ﻿using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Stratus.Builders.Roslyn;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace Stratus.Builders
+namespace Stratus.Builders.Roslyn.Web.Entity
 {
     public class EntityBuilder
     {
@@ -24,15 +23,16 @@ namespace Stratus.Builders
         private EntityBuilder()
         {
             CompilationUnit = SyntaxFactory.CompilationUnit();
+
+            PropertyDeclarations.Add(RoslynSyntaxBuilder.VariableDeclaration(SyntaxKind.PublicKeyword, "int", "Id").AddAttributeLists(RoslynSyntaxBuilder.KeyAttirbute("Key")));
         }
 
         public static EntityBuilder Builder() => new EntityBuilder();
 
         public EntityBuilder WithName(string name)
         {
-            ClassDeclaration = SyntaxFactory.ClassDeclaration(name);
-            ClassDeclaration = ClassDeclaration.AddAttributeLists(RoslynSyntaxBuilder.KeyValueAttirbute("Table", name.ToLower()));
-            
+            ClassDeclaration = SyntaxFactory.ClassDeclaration(name).AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword)).AddAttributeLists(RoslynSyntaxBuilder.KeyValueAttirbute("Table", name.ToLower()));
+
             return this;
         }
 
@@ -62,12 +62,7 @@ namespace Stratus.Builders
 
         public EntityBuilder WithGlobalVariable(SyntaxKind modifier, string type, string name)
         {
-            PropertyDeclarations.Add(
-                SyntaxFactory.PropertyDeclaration(SyntaxFactory.ParseTypeName(type), name)
-                    .AddModifiers(SyntaxFactory.Token(modifier))
-                    .AddAccessorListAccessors(RoslynSyntaxBuilder.GetSetAccessors())
-                    .AddAttributeLists(RoslynSyntaxBuilder.KeyValueAttirbute("Column", name.ToLower()))
-            );
+            PropertyDeclarations.Add(RoslynSyntaxBuilder.VariableDeclaration(modifier, type, name));
 
             return this;
         }
