@@ -17,7 +17,9 @@ namespace Stratus.Generator
         protected Class ClassBlueprint { get; set; }
         protected CompilationUnitSyntax CompilationUnit { get; set; }
 
-        private List<NamespaceDeclarationSyntax> Namespaces { get; set; } = new List<NamespaceDeclarationSyntax>();
+        private NamespaceDeclarationSyntax Namespace { get; set; }
+        private List<string> Interfaces { get; set; } = new List<string>();
+        private string ClassName { get; set; }
 
         private ClassBuilder() {
             ClassBlueprint = new Class();
@@ -27,12 +29,28 @@ namespace Stratus.Generator
         public static ClassBuilder Builder() => new ClassBuilder();
         public Class Build() => ClassBlueprint;
 
-        public ClassBuilder WithSpaceName(params string[] namespaces)
+        public ClassBuilder WithName(string name)
         {
-            foreach(var @namespace in namespaces)
+            ClassName = name;
+            return this;
+        }
+
+
+
+        public ClassBuilder WithSpaceName(string @namespace)
+        {
+            Namespace = SyntaxFactory.NamespaceDeclaration(SyntaxFactory.ParseName(@namespace)).NormalizeWhitespace();
+            
+            return this;
+        }
+
+        public ClassBuilder WithUsing(params string[] imports)
+        {
+            foreach (var import in imports)
             {
-                Namespaces.Add(SyntaxFactory.NamespaceDeclaration(SyntaxFactory.ParseName(@namespace)).NormalizeWhitespace());
+                CompilationUnit = CompilationUnit.AddUsings(SyntaxFactory.UsingDirective(SyntaxFactory.ParseName(import)));
             }
+
             return this;
         }
 
