@@ -5,11 +5,7 @@ using Stratus.Builders.Roslyn.Web.Controllers;
 using Stratus.Builders.Roslyn.Web.Entity;
 
 Console.WriteLine(
-    ControllerBuilder.Builder()
-        .WithSpaceName("Entities")
-        .WithName("User")
-        .WithImports("ComponentModel.DataAnnotations", "ComponentModel.DataAnnotations.Schema")
-        .WithBases("IEntity")
+    ControllerBuilder.Builder("Agent")
         .Build()
     );
 

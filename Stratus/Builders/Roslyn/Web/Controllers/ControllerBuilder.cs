@@ -27,7 +27,7 @@ namespace Stratus.Builders.Roslyn.Web.Controllers
 
         public static ControllerBuilder Builder(string name) => new ControllerBuilder(name);
 
-        public ControllerBuilder WithName()
+        private ControllerBuilder WithName()
         {
             ClassDeclaration = SyntaxFactory.ClassDeclaration(Name + CLASS_NAME_SUFFIX)
                 .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword))
@@ -54,7 +54,7 @@ namespace Stratus.Builders.Roslyn.Web.Controllers
             return this;
         }
 
-        public ControllerBuilder WithConstructor()
+        private ControllerBuilder WithConstructor()
         {
             ClassDeclaration = ClassDeclaration.WithMembers(
                 SyntaxFactory.SingletonList<MemberDeclarationSyntax>(
@@ -65,11 +65,11 @@ namespace Stratus.Builders.Roslyn.Web.Controllers
                             SyntaxFactory.Token(SyntaxKind.PublicKeyword)))
                     .WithParameterList(
                         SyntaxFactory.ParameterList(
-                            SyntaxFactory.SingletonSeparatedList<ParameterSyntax>(
+                            SyntaxFactory.SingletonSeparatedList(
                                 SyntaxFactory.Parameter(
                                     SyntaxFactory.Identifier("Service"))
                                 .WithType(
-                                    SyntaxFactory.IdentifierName(Name  + "Service")))))
+                                    SyntaxFactory.IdentifierName(Name + "Service")))))
                     .WithInitializer(
                         SyntaxFactory.ConstructorInitializer(
                             SyntaxKind.BaseConstructorInitializer,
@@ -84,13 +84,13 @@ namespace Stratus.Builders.Roslyn.Web.Controllers
             return this;
         }
 
-        public ControllerBuilder WithSpaceName(string @namespace)
+        private ControllerBuilder WithSpaceName(string @namespace)
         {
             NamespaceDeclaration = SyntaxFactory.NamespaceDeclaration(SyntaxFactory.ParseName(@namespace)).NormalizeWhitespace();
             return this;
         }
 
-        public ControllerBuilder WithImports(params string[] imports)
+        private ControllerBuilder WithImports(params string[] imports)
         {
             foreach (var import in imports)
             {
@@ -101,6 +101,8 @@ namespace Stratus.Builders.Roslyn.Web.Controllers
 
         public string Build()
         {
+            this.WithSpaceName("controllers").WithName().WithConstructor().WithBases();
+
             NamespaceDeclaration = NamespaceDeclaration.AddMembers(ClassDeclaration);
             CompilationUnit = CompilationUnit.AddMembers(NamespaceDeclaration);
 
