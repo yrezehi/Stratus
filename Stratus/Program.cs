@@ -1,13 +1,13 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
-using Stratus.Generator;
+using Stratus.Builders;
 
 Console.WriteLine(
     ClassBuilder.Builder()
         .WithSpaceName("Entities")
         .WithName("User")
-        .WithUsing("ComponentModel.DataAnnotations", "ComponentModel.DataAnnotations.Schema")
-        .WithBase("IEntity")
+        .WithImports("ComponentModel.DataAnnotations", "ComponentModel.DataAnnotations.Schema")
+        .WithBases("IEntity")
         .Build()
     );
 

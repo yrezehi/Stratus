@@ -10,18 +10,18 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Stratus.Generator
+namespace Stratus.Builders
 {
     public class ClassBuilder
     {
-        protected Class ClassBlueprint { get; set; }
         protected CompilationUnitSyntax CompilationUnit { get; set; }
 
         private NamespaceDeclarationSyntax NamespaceDeclaration { get; set; }
         private ClassDeclarationSyntax ClassDeclaration { get; set; }
+        private List<FieldDeclarationSyntax> FieldDeclarations { get; set; } = new List<FieldDeclarationSyntax>();
 
-        private ClassBuilder() {
-            ClassBlueprint = new Class();
+        private ClassBuilder()
+        {
             CompilationUnit = SyntaxFactory.CompilationUnit();
         }
 
@@ -33,7 +33,7 @@ namespace Stratus.Generator
             return this;
         }
 
-        public ClassBuilder WithBase(params string[] bases)
+        public ClassBuilder WithBases(params string[] bases)
         {
             foreach (var @base in bases)
             {
@@ -48,7 +48,7 @@ namespace Stratus.Generator
             return this;
         }
 
-        public ClassBuilder WithUsing(params string[] imports)
+        public ClassBuilder WithImports(params string[] imports)
         {
             foreach (var import in imports)
             {
@@ -57,11 +57,23 @@ namespace Stratus.Generator
             return this;
         }
 
-        public string Build() {
-            
+        public ClassBuilder WithVariable(SyntaxKind modifier, string type, string name)
+        {
+            FieldDeclarations.Add(SyntaxFactory.FieldDeclaration(SyntaxFactory.VariableDeclaration(SyntaxFactory.ParseTypeName(type))
+                .AddVariables(SyntaxFactory.VariableDeclarator(name)))
+                .AddModifiers(SyntaxFactory.Token(modifier)));
+            return this;
+        }
+
+        public string Build()
+        {
             NamespaceDeclaration = NamespaceDeclaration.AddMembers(ClassDeclaration);
             CompilationUnit = CompilationUnit.AddMembers(NamespaceDeclaration);
 
+            foreach(var field in FieldDeclarations)
+            {
+                ClassDeclaration.AddMembers(field);
+            }
 
             return CompilationUnit.NormalizeWhitespace().ToFullString();
         }
