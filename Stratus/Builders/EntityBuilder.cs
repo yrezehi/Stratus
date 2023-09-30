@@ -1,7 +1,6 @@
 ﻿using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Stratus.Declarations.Native;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +23,11 @@ namespace Stratus.Builders
         {
             CompilationUnit = SyntaxFactory.CompilationUnit();
         }
+
+        private AccessorDeclarationSyntax[] GetSetAccessors = new AccessorDeclarationSyntax[] {
+            SyntaxFactory.AccessorDeclaration(SyntaxKind.GetAccessorDeclaration).WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken)),
+            SyntaxFactory.AccessorDeclaration(SyntaxKind.SetAccessorDeclaration).WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken))
+        };
 
         public static EntityBuilder Builder() => new EntityBuilder();
 
@@ -62,14 +66,13 @@ namespace Stratus.Builders
             PropertyDeclarations.Add(
                 SyntaxFactory.PropertyDeclaration(SyntaxFactory.ParseTypeName(type), name)
                     .AddModifiers(SyntaxFactory.Token(modifier))
-                    .AddAccessorListAccessors(
-                        SyntaxFactory.AccessorDeclaration(SyntaxKind.GetAccessorDeclaration).WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken)),
-                        SyntaxFactory.AccessorDeclaration(SyntaxKind.SetAccessorDeclaration).WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken))
-                    )
+                    .AddAccessorListAccessors(GetSetAccessors)
             );
             
             return this;
         }
+
+
 
         public string Build()
         {
