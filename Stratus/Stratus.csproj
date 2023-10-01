@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Builders\Roslyn\Web\Repositories\" />
+    <Folder Include="Builders\Web\Repositories\" />
   </ItemGroup>
 
 </Project>

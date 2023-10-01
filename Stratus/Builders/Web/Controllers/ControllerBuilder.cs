@@ -3,7 +3,6 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Stratus.Builders.Roslyn;
-using Stratus.Builders.Roslyn.Web.Entity;
 
 namespace Stratus.Builders.Web.Controllers
 {
