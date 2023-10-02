@@ -2,6 +2,6 @@
 
 using Stratus;
 
-Loader.Load("").Result.Inquery();
+Loader.Load("C:\\Users\\Administrator\\Documents\\Projects\\Callem\\Callem.sln").Result.Inquery();
 
 Console.WriteLine("Finished Execution!");
