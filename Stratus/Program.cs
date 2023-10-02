@@ -1,11 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
-using Microsoft.CodeAnalysis.CSharp;
-using Stratus.Builders.Web.Controllers;
+using Stratus;
 
-Console.WriteLine(
-    ControllerBuilder.Builder("Agent")
-        .Build()
-    );
+Loader.Load("").Result.Inquery();
 
 Console.WriteLine("Finished Execution!");
