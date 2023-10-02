@@ -6,14 +6,14 @@ using Stratus.Exceptions;
 
 namespace Stratus
 {
-    public class Loader {
+    public class MSLoader {
     
         private MSBuildWorkspace Workspace;
         private Solution Solution;
 
-        public static async Task<Loader> Load(string path) {
+        public static async Task<MSLoader> Load(string path) {
             MSBuildLocator.RegisterDefaults();
-            Loader loader = new Loader();
+            MSLoader loader = new MSLoader();
 
             loader.Workspace = MSBuildWorkspace.Create();
             loader.Solution = await loader.Workspace.OpenSolutionAsync(path);
@@ -26,7 +26,7 @@ namespace Stratus
         public Project? GetProject(string name) =>
             Solution.Projects.FirstOrDefault(project => project.Name == name); 
 
-        public async INamedTypeSymbol GetClass(string projectName, string className)
+        public async Task<SyntaxNode> GetClass(string projectName, string className)
         {
             Project? project = this.GetProject(projectName);
 
@@ -43,7 +43,7 @@ namespace Stratus
             if (classTypeSymbol == null)
                 throw new Exception($"Couldn't load named type symbol for {projectName}");
 
-            return classTypeSymbol;
+            return classTypeSymbol.DeclaringSyntaxReferences[0].GetSyntax();
         }
     }
 }
