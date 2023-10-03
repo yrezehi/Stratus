@@ -2,6 +2,8 @@
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.MSBuild;
+using Microsoft.Extensions.FileSystemGlobbing;
+using Microsoft.Extensions.FileSystemGlobbing.Abstractions;
 using Stratus.Exceptions;
 
 namespace Stratus
@@ -10,6 +12,8 @@ namespace Stratus
     
         private MSBuildWorkspace Workspace;
         private Solution Solution;
+
+        private static string SOLUTION_PATTERN = "*.sln";
 
         public static async Task<MSLoader> Load(string path) {
             MSBuildLocator.RegisterDefaults();
@@ -44,6 +48,18 @@ namespace Stratus
                 throw new Exception($"Couldn't load named type symbol for {projectName}");
 
             return classTypeSymbol.DeclaringSyntaxReferences[0].GetSyntax();
+        }
+
+        public string SolutionGlobbing(string directoryPath)
+        {
+            PatternMatchingResult matcherResult = new Matcher().AddInclude(SOLUTION_PATTERN).Execute(new DirectoryInfoWrapper(new DirectoryInfo(directoryPath)));
+
+            if (!matcherResult.HasMatches)
+            {
+                throw new Exception($"No matches found for any solution under {directoryPath}");
+            }
+
+            return matcherResult.Files.FirstOrDefault().Path;
         }
     }
 }
