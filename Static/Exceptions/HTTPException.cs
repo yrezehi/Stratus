@@ -1,11 +1,11 @@
 ﻿namespace Static.Exceptions
 {
-    public class APIException : Exception
+    public class HTTPException : Exception
     {
         public int StatusCode { get; set; }
         public string? Message { get; set; }
 
-        public APIException(int code, string message) {
+        public HTTPException(int code, string message) {
             StatusCode = code;
             Message = message;
         }
