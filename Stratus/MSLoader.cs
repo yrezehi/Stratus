@@ -5,6 +5,7 @@ using Microsoft.CodeAnalysis.MSBuild;
 using Microsoft.Extensions.FileSystemGlobbing;
 using Microsoft.Extensions.FileSystemGlobbing.Abstractions;
 using Stratus.Exceptions;
+using System.Text.RegularExpressions;
 
 namespace Stratus
 {
@@ -13,7 +14,7 @@ namespace Stratus
         private MSBuildWorkspace Workspace;
         private Solution Solution;
 
-        private static string SOLUTION_PATTERN = "*.sln";
+        private static string SOLUTION_PATTERN = "**/*.sln";
 
         public static async Task<MSLoader> Load(string path) {
             MSBuildLocator.RegisterDefaults();
@@ -35,31 +36,37 @@ namespace Stratus
             Project? project = this.GetProject(projectName);
 
             if (project == null)
-                throw new Exception($"Couldn't load project {projectName}");
+                throw new ArgumentException($"Couldn't load project {projectName}");
 
             Compilation? compilation = await project.GetCompilationAsync();
 
             if (compilation == null)
-                throw new Exception($"Couldn't load compilation for {projectName}");
+                throw new ArgumentException($"Couldn't load compilation for {projectName}");
 
-            INamedTypeSymbol? classTypeSymbol = compilation.GetTypeByMetadataName(className);
+            INamedTypeSymbol? classTypeSymbol = compilation.GetSymbolsWithName(
+                name => Regex.IsMatch(name, $@"^.*?{className}$"),
+                SymbolFilter.Type
+            ).OfType<INamedTypeSymbol>().FirstOrDefault();
 
             if (classTypeSymbol == null)
-                throw new Exception($"Couldn't load named type symbol for {projectName}");
+                throw new ArgumentException($"Couldn't load named type symbol for {projectName}");
 
             return classTypeSymbol.DeclaringSyntaxReferences[0].GetSyntax();
         }
 
-        public string SolutionGlobbing(string directoryPath)
+        public static string SolutionGlobbing(string directoryPath)
         {
-            PatternMatchingResult matcherResult = new Matcher().AddInclude(SOLUTION_PATTERN).Execute(new DirectoryInfoWrapper(new DirectoryInfo(directoryPath)));
+            PatternMatchingResult matcherResult = new Matcher().AddInclude(SOLUTION_PATTERN)
+                .Execute(new DirectoryInfoWrapper(new DirectoryInfo(directoryPath)));
 
             if (!matcherResult.HasMatches)
             {
-                throw new Exception($"No matches found for any solution under {directoryPath}");
+                throw new ArgumentException($"No matches found for any solution under {directoryPath}");
             }
 
-            return matcherResult.Files.FirstOrDefault().Path;
+            var fileResult = matcherResult.Files.First();
+
+            return Path.Combine(directoryPath, fileResult.Path);
         }
     }
 }
