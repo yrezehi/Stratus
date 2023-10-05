@@ -16,7 +16,7 @@
 
             if(value == null)
             {
-                throw new ArgumentException("No such configuration property path {path}!");
+                throw new ArgumentException($"No such configuration property path {path}!");
             }
 
             return value!;
@@ -28,7 +28,7 @@
 
             if (value == null || value.Count == 0)
             {
-                throw new ArgumentException("No such configuration property path {path}!");
+                throw new ArgumentException($"No such configuration property path {path}!");
             }
 
             return value!;

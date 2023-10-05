@@ -8,9 +8,9 @@ using System.Reflection;
 
 namespace Static.Services.Abstracts
 {
-    public class ServiceBase<T> : IServiceBase<T> where T : class
+    public abstract class ServiceBase<T> : IServiceBase<T> where T : class
     {
-        public ServiceBase(IUnitOfWork unitOfWork)
+        protected ServiceBase(IUnitOfWork unitOfWork)
         {
             DBSet = unitOfWork.Repository<T>().DBSet;
             UnitOfWork = unitOfWork;
@@ -18,8 +18,6 @@ namespace Static.Services.Abstracts
 
         protected internal IUnitOfWork UnitOfWork { get; set; }
         protected DbSet<T> DBSet { get; set; }
-
-        private static int DEFAULT_PAGE_SIZE = 10;
 
         public virtual IEnumerable<T> Find(Expression<Func<T, bool>> expression) =>
             DBSet.Where(expression);
@@ -37,10 +35,10 @@ namespace Static.Services.Abstracts
             List<string> properties = enetityInstance.SearchableProperties();
 
             if (!ReflectionUtil.ContainsProperty(enetityInstance, propertyName))
-                throw new Exception($"Property is not allowed to be searched or does not exists!");
+                throw new ArgumentException($"Property is not allowed to be searched or does not exists!");
 
-            if (!properties.Any(property => properties.Any(searchableProperty => searchableProperty.ToLower().Equals(propertyName.ToLower()))))
-                throw new Exception($"Property is not allowed to be searched or does not exists!");
+            if (!properties.Exists(property => properties.Exists(searchableProperty => searchableProperty.ToLower().Equals(propertyName.ToLower()))))
+                throw new ArgumentException($"Property is not allowed to be searched or does not exists!");
 
 
             ParameterExpression parameter = Expression.Parameter(typeof(T), "property");
@@ -62,7 +60,7 @@ namespace Static.Services.Abstracts
             T? entity = await DBSet.FirstOrDefaultAsync(predicate);
 
             if (entity == null)
-                throw new Exception($"Find by property was not found!");
+                throw new ArgumentException($"Find by property was not found!");
 
             return entity;
         }
@@ -74,7 +72,7 @@ namespace Static.Services.Abstracts
             IEnumerable<T> entites = await DBSet.Where(predicate).ToListAsync();
 
             if (!entites.Any())
-                throw new Exception($"Find all by property was not found!");
+                throw new ArgumentException($"Find all by property was not found!");
 
             return entites;
         }
@@ -84,7 +82,7 @@ namespace Static.Services.Abstracts
             var entity = await DBSet.FindAsync(id);
 
             if (entity == null)
-                throw new Exception("Entity Not Found");
+                throw new ArgumentException("Entity Not Found");
 
             return entity;
         }
@@ -105,12 +103,12 @@ namespace Static.Services.Abstracts
                 return targetEntitiy;
             }
 
-            throw new Exception(nameof(IEntity));
+            throw new ArgumentException(nameof(IEntity));
         }
 
         public async Task<T> Update(IEntity entityToUpdate)
         {
-            T entity = await DBSet.FirstOrDefaultAsync(entity => ((IEntity)entity).Id == entityToUpdate.Id);
+            T? entity = await DBSet.FirstOrDefaultAsync(entity => ((IEntity)entity).Id == entityToUpdate.Id);
 
             if (entity != null)
             {
@@ -120,10 +118,9 @@ namespace Static.Services.Abstracts
                 {
                     var dtoPropertyValue = ReflectionUtil.GetValueOf(entityToUpdate, property.Name);
 
-                    if (dtoPropertyValue != null)
+                    if (dtoPropertyValue != null && ReflectionUtil.ContainsProperty(entity, property.Name))
                     {
-                        if (ReflectionUtil.ContainsProperty(entity, property.Name))
-                            ReflectionUtil.SetValueOf(entity, property.Name, dtoPropertyValue);
+                        ReflectionUtil.SetValueOf(entity, property.Name, dtoPropertyValue);
                     }
                 }
 
@@ -132,7 +129,7 @@ namespace Static.Services.Abstracts
                 return entity;
             }
 
-            throw new Exception(nameof(T));
+            throw new ArgumentException(nameof(T));
         }
 
         public async Task<T> Update(T updatedEntity)
@@ -150,7 +147,7 @@ namespace Static.Services.Abstracts
                 return entityToUpdate;
             }
 
-            throw new Exception("Entity Not Found");
+            throw new ArgumentException("Entity Not Found");
         }
 
         public async Task<T> Create(T entity)

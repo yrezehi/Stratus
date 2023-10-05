@@ -7,7 +7,7 @@ namespace Static.Health
     {
         private readonly HttpClient HttpClient;
 
-        private static string EXTERNAL_SERVICES = "ExternalServices";
+        private static string EXTERNAL_SERVICES = "BASE_EXTERNAL_SERVICES";
 
         public APICheck()
         {
@@ -32,7 +32,7 @@ namespace Static.Health
         {
             var responses = await Task.WhenAll(concurrentResponses);
 
-            return responses.Any(response => !response);
+            return responses.ToList().Exists(response => !response);
         }
 
         private async Task<bool> IsHeadRequestReachable(string url)
