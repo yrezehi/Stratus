@@ -18,15 +18,21 @@ namespace Static.Health
         {
             IList<string> services = WebConfiguration.GetList<string>(EXTERNAL_SERVICES);
 
-            foreach (string service in services)
+            IEnumerable<Task<bool>> concurrentResponses = services.Select(IsHeadRequestReachable);
+
+            if (await AnyUnreachableRequest(concurrentResponses))
             {
-                if (!(await IsHeadRequestReachable(service)))
-                {
-                    return HealthCheckResult.Unhealthy();
-                }
+                return HealthCheckResult.Unhealthy();
             }
-            
+
             return HealthCheckResult.Healthy();
+        }
+
+        private async Task<bool> AnyUnreachableRequest(IEnumerable<Task<bool>> concurrentResponses)
+        {
+            var responses = await Task.WhenAll(concurrentResponses);
+
+            return responses.Any(response => !response);
         }
 
         private async Task<bool> IsHeadRequestReachable(string url)
