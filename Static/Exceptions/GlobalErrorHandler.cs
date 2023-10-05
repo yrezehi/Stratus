@@ -1,4 +1,5 @@
 ﻿using Serilog;
+using Static.Exceptions.HTTP;
 using System.Text.Json;
 
 namespace Static.Exceptions
@@ -13,7 +14,7 @@ namespace Static.Exceptions
         public async Task Invoke(HttpContext context)
         {
             try { await RequestDelegate(context); }
-            catch (HTTPException exception) { await HandleException(context, exception); }
+            catch (HttpException exception) { await HandleException(context, exception); }
             catch (Exception exception) { await HandleException(context, exception); }
         }
 
@@ -22,9 +23,9 @@ namespace Static.Exceptions
             dynamic loggingErrorObject = new { };
 
             string traceId = context.TraceIdentifier.ToString();
-            int statusCode = exception is HTTPException ? ((HTTPException) exception).StatusCode : HTTPException.InternalServerError;
+            int statusCode = exception is HttpException ? ((HttpException) exception).StatusCode : HttpException.InternalServerError;
 
-            string? exceptionMessage = exception is HTTPException ? ((HTTPException)exception).Message : "";
+            string? exceptionMessage = exception is HttpException ? ((HttpException)exception).Message : "";
 
 
             if (context.Request.Path.StartsWithSegments("api"))
