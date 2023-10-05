@@ -24,5 +24,10 @@ namespace Static.Configuration
 
             builder.Services.AddTransient<IUnitOfWork, IUnitOfWork<RepositoryContext>>();
         }
+
+        public static void RegisterConfiguration(this WebApplicationBuilder builder)
+        {
+            WebConfiguration.Register(builder.Configuration);
+        }
     }
 }

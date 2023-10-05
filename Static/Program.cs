@@ -14,6 +14,8 @@ Log.Logger = new LoggerConfiguration()
                     .AddEnvironmentVariables().Build()
                 ).CreateLogger();
 
+builder.RegisterConfiguration();
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddHealthChecks();
