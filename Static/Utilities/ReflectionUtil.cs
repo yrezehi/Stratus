@@ -1,6 +1,5 @@
 ﻿using Static.Models.Abstracts.Interfaces;
 using System.Reflection;
-using System.Security.Principal;
 
 namespace Static.Utilities
 {

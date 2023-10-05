@@ -1,5 +1,4 @@
 ﻿using UI.HTML;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace UI
 {

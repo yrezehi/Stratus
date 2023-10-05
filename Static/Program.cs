@@ -1,7 +1,5 @@
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Serilog;
-using Serilog.Events;
 using Static.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
