@@ -4,18 +4,28 @@ namespace Static.Health
 {
     public class APICheck : IHealthCheck
     {
-        public Task<HealthCheckResult> CheckHealthAsync(HealthCheckContext context, CancellationToken cancellationToken = default)
+        private HttpClient HttpClient;
+
+        public APICheck()
         {
-            throw new NotImplementedException();
+            HttpClient = new HttpClient();
         }
 
-        private async Task<bool> IsReachable()
+        public async Task<HealthCheckResult> CheckHealthAsync(HealthCheckContext context, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException ();
+            if (await IsHeadRequestReachable(""))
+            {
+                return HealthCheckResult.Healthy();
+            }
+
+            return HealthCheckResult.Unhealthy();
         }
-        private async Task<bool> IsHeadRequestReachable()
+
+        private async Task<bool> IsHeadRequestReachable(string url)
         {
-            throw new NotImplementedException();
+            HttpResponseMessage response = await HttpClient.SendAsync(new HttpRequestMessage(HttpMethod.Head, url));
+
+            return response.IsSuccessStatusCode;
         }
     }
 }
