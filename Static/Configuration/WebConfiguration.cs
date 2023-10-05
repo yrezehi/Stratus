@@ -1,6 +1,6 @@
 ﻿namespace Static.Configuration
 {
-    public static class Configuration
+    public static class WebConfiguration
     {
         private static IConfiguration ConfigurationInstance = new ConfigurationBuilder().Build();
 
@@ -33,8 +33,5 @@
 
             return value!;
         }
-
-
-
     }
 }
