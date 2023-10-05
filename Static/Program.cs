@@ -16,6 +16,7 @@ Log.Logger = new LoggerConfiguration()
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddHealthChecks();
 
 builder.Services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
