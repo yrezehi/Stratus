@@ -8,15 +8,27 @@ namespace Static.Exceptions.HTTP
         public int StatusCode { get; set; }
         public string? Message { get; set; }
 
+        public HttpException() {
+            StatusCode = (int) HttpStatusCode.InternalServerError;
+            Message = Regex.Replace(Enum.GetName(typeof(HttpStatusCode), HttpStatusCode.InternalServerError)!, "([a-z])([A-Z])", "$1 $2").Trim();
+        }
+
+        public HttpException(HttpStatusCode code)
+        {
+            StatusCode = (int)code;
+            Message = Regex.Replace(Enum.GetName(typeof(HttpStatusCode), code)!, "([a-z])([A-Z])", "$1 $2").Trim();
+        }
+
+        public HttpException(string message)
+        {
+            StatusCode = (int)HttpStatusCode.InternalServerError;
+            Message = message;
+        }
+
         public HttpException(int code, string message)
         {
             StatusCode = code;
             Message = message;
-        }
-
-        public HttpException() {
-            StatusCode = (int) HttpStatusCode.InternalServerError;
-            Message = Regex.Replace(Enum.GetName(typeof(HttpStatusCode), HttpStatusCode.InternalServerError)!, "([a-z])([A-Z])", "$1 $2").Trim();
         }
 
         public HttpException(HttpStatusCode code, string message) {
@@ -24,9 +36,5 @@ namespace Static.Exceptions.HTTP
             Message = message;
         }
 
-        public HttpException(HttpStatusCode code) {
-            StatusCode = (int) code;
-            Message = Regex.Replace(Enum.GetName(typeof(HttpStatusCode), code)!, "([a-z])([A-Z])", "$1 $2").Trim();
-        }
     }
 }
