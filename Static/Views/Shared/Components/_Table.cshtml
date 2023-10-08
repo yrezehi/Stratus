@@ -5,6 +5,7 @@
 
 @{
     var entityProperties = ReflectionUtil.GetInterfacedObjectProperties(Model.EntitySignture.GetType());
+    var entities = Model.GetEntities();
 }
 
 <div class="relative overflow-x-auto">
@@ -20,38 +21,17 @@
             </tr>
         </thead>
         <tbody>
-            <tr class="bg-white border-b">
-                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                    property.
-                </th>
-                <td class="px-6 py-4">
-                    Silver
-                </td>
-            </tr>
-            <tr class="bg-white border-b">
-                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                    property.
-                </th>
-                <td class="px-6 py-4">
-                    Silver
-                </td>
-            </tr>
-            <tr class="bg-white border-b">
-                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                    Microsoft Surface Pro
-                </th>
-                <td class="px-6 py-4">
-                    White
-                </td>
-            </tr>
-            <tr class="bg-white">
-                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                    Magic Mouse 2
-                </th>
-                <td class="px-6 py-4">
-                    Black
-                </td>
-            </tr>
+            @foreach (var entity in entities)
+            {
+                <tr class="bg-white">
+                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                        Magic Mouse 2
+                    </th>
+                    <td class="px-6 py-4">
+                        Black
+                    </td>
+                </tr>
+            }
         </tbody>
     </table>
 </div>

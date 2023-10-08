@@ -22,6 +22,9 @@ namespace Static.Utilities
             (new Type[] { type })
                 .SelectMany(interfaceProperty => interfaceProperty.GetProperties());
 
+        public static IEnumerable<(string, object?)> GetPropertyKeyValue<T>(object targetObject, string propName) =>
+            targetObject.GetType().GetProperties().Select(property => (property.Name, property.GetValue(targetObject))));
+
         public static IEntity MapEntity<T>(IEntity entity, IEntity entityToUpdate)
         {
             var dtoProperties = ReflectionUtil.GetInterfacedObjectProperties(entity.GetType());
