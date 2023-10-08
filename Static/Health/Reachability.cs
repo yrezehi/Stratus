@@ -4,15 +4,24 @@ namespace Static.Health
 {
     public static class Reachability
     {
-        public IList<string> IsReachable(params string[] dependencies)
+        private static int REQUEST_TIMEOUT = 5;
+
+        public static IList<string> IsReachable(params string[] dependencies)
         {
             List<string> failues = new List<string>();
 
             Ping pinger = new Ping();
 
             foreach (var dependency in dependencies) {
-                pinger.SendAsync(dependency);
+                PingReply replay = pinger.Send(dependency, REQUEST_TIMEOUT);
+
+                if(replay.Status == IPStatus.Success)
+                {
+                    failues.Add($"Ping failed for {replay.Address.ToString()}");
+                }
             }
+
+            return failues;
         }
     }
 }
