@@ -4,7 +4,7 @@
 @model ITableViewModel<IEntity>
 
 @{
-    var entityProperties = ReflectionUtil.GetInterfacedObjectProperties(Model.Entity.GetType());
+    var entityProperties = ReflectionUtil.GetInterfacedObjectProperties(Model.EntitySignture.GetType());
 }
 
 <div class="relative overflow-x-auto">
