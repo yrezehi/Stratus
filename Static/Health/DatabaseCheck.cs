@@ -7,14 +7,11 @@ namespace Static.Health
     {
         private readonly RepositoryContext RepositoryContext;
 
-        public DatabaseCheck(RepositoryContext repositoryContext)
-        {
+        public DatabaseCheck(RepositoryContext repositoryContext) =>
             RepositoryContext = repositoryContext;
-        }
 
         public async Task<HealthCheckResult> CheckHealthAsync(HealthCheckContext context, CancellationToken cancellationToken = default)
         {
-            
             if(await RepositoryContext.Database.CanConnectAsync())
             {
                 return HealthCheckResult.Healthy();
