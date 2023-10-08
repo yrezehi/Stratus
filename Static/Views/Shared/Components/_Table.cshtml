@@ -1,7 +1,7 @@
 ﻿@using Static.Utilities
 ﻿@using System.Reflection
 
-@model IFormViewModel<IEntity>
+@model ITableViewModel<IEntity>
 
 @{
     var entityProperties = ReflectionUtil.GetInterfacedObjectProperties(Model.Entity.GetType());

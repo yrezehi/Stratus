@@ -16,7 +16,6 @@ namespace Static.Utilities
 
         public static IEnumerable<PropertyInfo> GetInterfacedObjectProperties(Type type) =>
             (new Type[] { type })
-                .Concat(type.GetInterfaces())
                     .SelectMany(interfaceProperty => interfaceProperty.GetProperties());
 
         public static IEnumerable<PropertyInfo> GetObjectProperties(Type type) =>
