@@ -7,5 +7,7 @@ namespace Static.Models.ViewModels.Interfaces
     {
         public IEntity EntitySignture { get; set; }
         public IEnumerable<T> GetEntities();
+        public int PageIndex { get; set; }
+        public int PageSize { get; set; }
     }
 }
