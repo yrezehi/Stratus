@@ -3,6 +3,10 @@ using System.Text.RegularExpressions;
 
 namespace Static.Exceptions.HTTP
 {
+    /*
+        Meant to redirect a request to exception handling page
+     */
+
     public class HttpException : Exception
     {
         public int StatusCode { get; set; }
