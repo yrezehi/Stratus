@@ -7,6 +7,8 @@ namespace Static.Models.ViewModels
     {
         public IEntity EntitySignture { get; set; } = (T)Activator.CreateInstance(typeof(T))!;
         public IList<T> Entities { get; set; }
+        public int PageIndex { get; set; }
+        public int PageSize { get; set; }
 
         public TableViewModel(IList<T> entities) =>
             Entities = entities;
