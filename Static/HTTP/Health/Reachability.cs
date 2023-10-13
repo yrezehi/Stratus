@@ -1,6 +1,6 @@
 ﻿using System.Net.NetworkInformation;
 
-namespace Static.Health
+namespace Static.HTTP.Health
 {
     public static class Reachability
     {
@@ -12,10 +12,11 @@ namespace Static.Health
 
             Ping pinger = new Ping();
 
-            foreach (var dependency in dependencies) {
+            foreach (var dependency in dependencies)
+            {
                 PingReply replay = pinger.Send(dependency, REQUEST_TIMEOUT);
 
-                if(replay.Status == IPStatus.Success)
+                if (replay.Status == IPStatus.Success)
                 {
                     failues.Add($"Ping failed for {replay.Address.ToString()}");
                 }

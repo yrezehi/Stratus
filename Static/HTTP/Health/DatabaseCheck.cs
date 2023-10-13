@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Static.Repositories;
 
-namespace Static.Health
+namespace Static.HTTP.Health
 {
     public class DatabaseCheck : IHealthCheck
     {
@@ -12,7 +12,7 @@ namespace Static.Health
 
         public async Task<HealthCheckResult> CheckHealthAsync(HealthCheckContext context, CancellationToken cancellationToken = default)
         {
-            if(await RepositoryContext.Database.CanConnectAsync())
+            if (await RepositoryContext.Database.CanConnectAsync())
             {
                 return HealthCheckResult.Healthy();
             }

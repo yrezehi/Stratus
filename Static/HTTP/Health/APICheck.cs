@@ -1,13 +1,12 @@
 ﻿using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Static.Configuration;
 
-namespace Static.Health
+namespace Static.HTTP.Health
 {
     public class APICheck : IHealthCheck
     {
         private readonly HttpClient HttpClient;
-
-        private static string EXTERNAL_SERVICES = "BASE_EXTERNAL_SERVICES";
+        private static string EXTERNAL_SERVICES_KEY = "BASE_EXTERNAL_SERVICES";
 
         public APICheck()
         {
@@ -16,7 +15,7 @@ namespace Static.Health
 
         public async Task<HealthCheckResult> CheckHealthAsync(HealthCheckContext context, CancellationToken cancellationToken = default)
         {
-            IList<string> services = WebConfiguration.GetList<string>(EXTERNAL_SERVICES);
+            IList<string> services = WebConfiguration.GetList<string>(EXTERNAL_SERVICES_KEY);
 
             IEnumerable<Task<bool>> concurrentResponses = services.Select(IsHeadRequestReachable);
 

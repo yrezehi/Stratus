@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
-using Static.Health;
+using Static.HTTP.Health;
 using Static.Repositories;
 using Static.Repositories.Abstracts.Interfaces;
 
