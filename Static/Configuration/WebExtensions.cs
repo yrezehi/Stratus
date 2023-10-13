@@ -16,7 +16,9 @@ namespace Static.Configuration
             builder.Services.AddSingleton<IHealthCheck, APICheck>();
         }
 
-        public static void RegisterSingletonServices(this WebApplicationBuilder builder) { }
+        public static void RegisterSingletonServices(this WebApplicationBuilder builder) {
+            builder.Services.AddHttpClient();
+        }
 
         public static void RegisterTransientServices(this WebApplicationBuilder builder) { }
 
