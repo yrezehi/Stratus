@@ -1,15 +1,19 @@
-﻿using System.IO;
+﻿using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using System.IO;
 
 namespace Stratus
 {
     public class ClassLoader
     {
-        public static void Load(string classPath) {
+        public static CompilationUnitSyntax Load(string classPath) {
 
             if (!File.Exists(classPath))
             {
                 throw new FileNotFoundException($"Class was not found for {classPath}");
             }
+
+            return ParseClassSyntax(LoadAsText(classPath));
         }
 
         private static string LoadAsText(string classPath)
@@ -19,5 +23,9 @@ namespace Stratus
                 return streamReader.ReadToEnd();
             }
         }
+
+        private static CompilationUnitSyntax ParseClassSyntax(string serializedClass) =>
+            (CompilationUnitSyntax) CSharpSyntaxTree.ParseText(serializedClass).GetRoot();
+      
     }
 }
