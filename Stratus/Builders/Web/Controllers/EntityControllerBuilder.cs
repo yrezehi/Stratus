@@ -6,8 +6,9 @@ using Stratus.Builders.Roslyn;
 
 namespace Stratus.Builders.Web.Controllers
 {
-    public class ControllerBuilder
+    public class EntityControllerBuilder
     {
         private static string ENTITY_CONTROLLER_FILE_NAME = "EntityController.txt";
+
     }
 }

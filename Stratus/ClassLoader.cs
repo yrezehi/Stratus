@@ -4,7 +4,7 @@ using System.IO;
 
 namespace Stratus
 {
-    public class ClassLoader
+    public static class ClassLoader
     {
         public static CompilationUnitSyntax Load(string classPath) {
 
@@ -26,6 +26,5 @@ namespace Stratus
 
         private static CompilationUnitSyntax ParseClassSyntax(string serializedClass) =>
             (CompilationUnitSyntax) CSharpSyntaxTree.ParseText(serializedClass).GetRoot();
-      
     }
 }

@@ -1,1 +1,8 @@
-﻿
+﻿namespace Projec_t.Controllers
+{
+    [Route("[controller]")]
+    public class Entit_yController : BaseController<Entit_yService, Entity>
+    {
+        public Entit_yController(Entit_yService Service) : base(Service) { }
+    }
+}
