@@ -42,5 +42,10 @@ namespace Stratus.Builders.Roslyn
                         .AddAttributeLists(RoslynSyntaxBuilder.KeyValueAttirbute("Column", name.ToLower()));
         }
 
+        public static ClassDeclarationSyntax ClassDeclaration(string className) =>
+            SyntaxFactory.ClassDeclaration(className);
+
+        
+
     }
 }
