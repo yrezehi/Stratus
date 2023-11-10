@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.Diagnostics.HealthChecks;
-using Static.Configuration;
 
 namespace Static.HTTP.Health
 {
@@ -15,7 +14,7 @@ namespace Static.HTTP.Health
 
         public async Task<HealthCheckResult> CheckHealthAsync(HealthCheckContext context, CancellationToken cancellationToken = default)
         {
-            IList<string> services = WebConfiguration.GetList<string>(EXTERNAL_SERVICES_KEY);
+            IList<string> services = Configurations.Configuration.GetList<string>(EXTERNAL_SERVICES_KEY);
 
             IEnumerable<Task<bool>> concurrentResponses = services.Select(IsHeadRequestReachable);
 

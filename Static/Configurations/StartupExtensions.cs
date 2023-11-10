@@ -4,9 +4,9 @@ using Static.HTTP.Health;
 using Static.Repositories;
 using Static.Repositories.Abstracts.Interfaces;
 
-namespace Static.Configuration
+namespace Static.Configurations
 {
-    public static class WebExtensions
+    public static class StartupExtensions
     {
         public static void RegisterHealthChecks(this WebApplicationBuilder builder)
         {
@@ -16,7 +16,8 @@ namespace Static.Configuration
             builder.Services.AddSingleton<IHealthCheck, APICheck>();
         }
 
-        public static void RegisterSingletonServices(this WebApplicationBuilder builder) {
+        public static void RegisterSingletonServices(this WebApplicationBuilder builder)
+        {
             builder.Services.AddHttpClient();
         }
 
@@ -24,13 +25,13 @@ namespace Static.Configuration
 
         public static void RegisterDB(this WebApplicationBuilder builder)
         {
-            builder.Services.AddDbContext<RepositoryContext>(option => option.UseInMemoryDatabase("MEMORYDATABASE"));
+            builder.Services.AddDbContextPool<RepositoryContext>(option => option.UseInMemoryDatabase("MEMORYDATABASE"));
             builder.Services.AddTransient<IUnitOfWork, IUnitOfWork<RepositoryContext>>();
         }
 
         public static void RegisterConfiguration(this WebApplicationBuilder builder)
         {
-            WebConfiguration.Register(builder.Configuration);
+            Configuration.Register(builder.Configuration);
         }
     }
 }
