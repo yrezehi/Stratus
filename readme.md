@@ -12,7 +12,7 @@ Wasting so much time to setup a project over, over and over never been more pain
 
 <h1 align="center">
   <br>
-    <img src="peek.png" alt="stratus-overview" width="800">
+    <img src="peak.PNG" alt="stratus-overview" width="1200">
   <br>
 </h1>
 
