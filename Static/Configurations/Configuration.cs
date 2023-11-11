@@ -1,4 +1,4 @@
-﻿namespace Static.Configuration
+﻿namespace Static.Configurations
 {
     public static class Configuration
     {
@@ -14,7 +14,7 @@
         {
             T? value = ConfigurationInstance.GetValue<T>(path);
 
-            if(value == null)
+            if (value == null)
             {
                 throw new ArgumentException($"No such configuration property path {path}!");
             }
